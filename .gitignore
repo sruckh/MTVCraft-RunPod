@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.egg-info/
+*.egg
+
+# Project specific
+pretrained_models/
+/workspace/OUTPUT/
+output_dir/
+tmp_audios/
+logs/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
