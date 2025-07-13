@@ -53,8 +53,8 @@ LLM_lock = threading.Lock()
 
 elevenlab_lock = threading.Lock()
 
-qwen_model_name = "qwen-plus"  # 你可以根据需要更改为其他模型名称
-qwen_api_key = "xxxxxx"
+qwen_model_name = os.environ.get("QWEN_MODEL_NAME", "qwen-plus")
+qwen_api_key = os.environ.get("QWEN_API_KEY")
 
 client = OpenAI(
     api_key=qwen_api_key,
@@ -62,7 +62,7 @@ client = OpenAI(
 )
 
 elevenlabs = ElevenLabs(
-    api_key="xxxx",
+    api_key=os.environ.get("ELEVENLABS_KEY"),
 )
 
 def label_prompt(input_prompt):
