@@ -12,8 +12,9 @@ RUN chmod +x runpod-startup.sh
 
 # Set environment variables that will be passed from RunPod
 # An empty default value is provided, but these should be set in the RunPod template.
-ENV QWEN_MODEL_NAME="qwen-plus"
-ENV QWEN_API_KEY=""
+ENV LLM_MODEL_NAME="qwen-plus"
+ENV LLM_API_KEY=""
+ENV LLM_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1"
 ENV ELEVENLABS_KEY=""
 ENV HF_TOKEN=""
 

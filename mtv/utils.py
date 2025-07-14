@@ -53,14 +53,30 @@ LLM_lock = threading.Lock()
 
 elevenlab_lock = threading.Lock()
 
-qwen_model_name = os.environ.get("QWEN_MODEL_NAME", "qwen-plus")
-qwen_api_key = os.environ.get("QWEN_API_KEY")
+# --- Generic LLM Client Initialization ---
+# This section is refactored to allow using different OpenAI-compatible APIs
+# by setting environment variables in your RunPod template.
 
-client = OpenAI(
-    api_key=qwen_api_key,
-    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
-)
+# Get LLM configuration from environment variables
+llm_model_name = os.environ.get("LLM_MODEL_NAME", "qwen-plus")
+llm_api_key = os.environ.get("LLM_API_KEY")
+llm_base_url = os.environ.get("LLM_BASE_URL") # e.g., "https://openrouter.ai/api/v1" or "https://dashscope.aliyuncs.com/compatible-mode/v1"
 
+# Initialize the OpenAI client
+# If llm_base_url is provided, it will be used.
+# Otherwise, the client defaults to the official OpenAI API.
+if llm_base_url:
+    client = OpenAI(
+        api_key=llm_api_key,
+        base_url=llm_base_url,
+    )
+else:
+    client = OpenAI(
+        api_key=llm_api_key,
+        # base_url is omitted to use the OpenAI default
+    )
+
+# --- ElevenLabs Client Initialization ---
 elevenlabs = ElevenLabs(
     api_key=os.environ.get("ELEVENLABS_KEY"),
 )
@@ -88,7 +104,7 @@ def label_prompt(input_prompt):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -123,7 +139,7 @@ def enhance_prompt_effect(input_prompt):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -160,7 +176,7 @@ def enhance_prompt_one(input_prompt=None):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -193,7 +209,7 @@ def enhance_prompt_one(input_prompt=None):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -221,7 +237,7 @@ def enhance_prompt_one(input_prompt=None):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -258,7 +274,7 @@ def enhance_prompt_two(input_prompt=None):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -297,7 +313,7 @@ def enhance_prompt_two(input_prompt=None):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -325,7 +341,7 @@ def enhance_prompt_two(input_prompt=None):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -374,7 +390,7 @@ def generate_audio_prompt_two(input_prompt,enhanced_prompt):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -447,7 +463,7 @@ def generate_audio_prompt_two(input_prompt,enhanced_prompt):
     '''
     with LLM_lock:
         completion2 = client.chat.completions.create(
-            model=qwen_model_name, # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/model-studio/getting-started/models
+            model=llm_model_name, # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/model-studio/getting-started/models
             messages=[
                 {
                     "role": "system",
@@ -648,7 +664,7 @@ def generate_audio_prompt_one(input_prompt, enhanced_prompt):
     '''
     with LLM_lock:
         completion = client.chat.completions.create(
-            model=qwen_model_name,
+            model=llm_model_name,
             messages=[
                 {
                     "role": "system",
@@ -695,7 +711,7 @@ def generate_audio_prompt_one(input_prompt, enhanced_prompt):
     '''
     with LLM_lock:
         completion2 = client.chat.completions.create(
-            model=qwen_model_name, # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/model-studio/getting-started/models
+            model=llm_model_name, # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/model-studio/getting-started/models
             messages=[
                 {
                     "role": "system",
@@ -894,7 +910,7 @@ def generate_audio_prompt_effect(input_prompt,enhanced_prompt):
     '''
     with LLM_lock:
         completion2 = client.chat.completions.create(
-            model=qwen_model_name, # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/model-studio/getting-started/models
+            model=llm_model_name, # 此处以qwen-vl-max-latest为例，可按需更换模型名称。模型列表：https://help.aliyun.com/model-studio/getting-started/models
             messages=[
                 {
                     "role": "system",
