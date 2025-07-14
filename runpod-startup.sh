@@ -6,7 +6,8 @@ set -e
 echo ">>> Installing system dependencies..."
 apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
-    git
+    git \
+    build-essential
 
 # 2. Install Python dependencies
 echo ">>> Installing Python dependencies..."
