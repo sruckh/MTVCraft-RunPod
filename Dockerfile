@@ -9,6 +9,7 @@ ENV PYTHONUNBUFFERED=1
 # Install Python 3.10, pip, and other basic tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3.10 \
+    python3.10-dev \
     python3-pip \
     python-is-python3 \
     && rm -rf /var/lib/apt/lists/*
