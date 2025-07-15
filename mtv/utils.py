@@ -78,7 +78,7 @@ else:
 
 # --- ElevenLabs Client Initialization ---
 elevenlabs = ElevenLabs(
-    api_key=os.environ.get("ELEVENLABS_KEY"),
+    api_key=os.environ.get("ELEVENLABS_API_KEY"),
 )
 
 def label_prompt(input_prompt):
