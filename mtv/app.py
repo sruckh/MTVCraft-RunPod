@@ -506,4 +506,4 @@ with gr.Blocks() as demo:
     )
 
 
-demo.launch(share=True, server_port=8080, allowed_paths=['/workspace/OUTPUT', './', '/tmp'])
+demo.launch(share=True, server_port=8080, allowed_paths=[args.output_dir, './', '/tmp'])

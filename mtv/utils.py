@@ -492,7 +492,7 @@ def generate_audio_prompt_two(input_prompt,enhanced_prompt):
                 "grandma":["q1Hhtkt94vkD6q7p50hW","RILOU7YmBhvwJGDGjNmP"]#Alese,Jane
     }
     
-    audio_dir = './tmp_audios'
+    audio_dir = '/tmp/tmp_audios'
     os.makedirs(audio_dir, exist_ok=True)
 
     genv0 = os.path.join(audio_dir, "genv0")
@@ -744,7 +744,7 @@ def generate_audio_prompt_one(input_prompt, enhanced_prompt):
     }
 
 
-    audio_dir = './tmp_audios'
+    audio_dir = '/tmp/tmp_audios'
     os.makedirs(audio_dir, exist_ok=True)
 
     genv0 = os.path.join(audio_dir, "genv0")
@@ -933,7 +933,7 @@ def generate_audio_prompt_effect(input_prompt,enhanced_prompt):
         f.write('\n')
         f.write(completion2.choices[0].message.content)
 
-    audio_dir = './tmp_audios'
+    audio_dir = '/tmp/tmp_audios'
     os.makedirs(audio_dir, exist_ok=True)
 
     genv0 = os.path.join(audio_dir, "genv0")
